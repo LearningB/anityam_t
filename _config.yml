@@ -60,3 +60,5 @@ exclude:
   - gulpfile.js
   - package.json
   - README.md
+
+theme: jekyll-theme-leap-day

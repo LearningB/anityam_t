@@ -14,6 +14,13 @@ This will be the outlook of how I will be creating my blog with the data and vis
 
 
 <div id="chart"></div>
+<style>
+  svg {
+  display: block;
+  margin: auto;
+  border: 1px solid gray;
+}
+</style>
 <script>
 var width = 960,
     height = 500,

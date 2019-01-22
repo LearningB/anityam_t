@@ -47,8 +47,8 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 var svg = d3.select("#chart").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width, "100%")
+    .attr("height", height,"100%");
 var circle = svg.selectAll("circle")
     .data(nodes)
   .enter().append("circle")

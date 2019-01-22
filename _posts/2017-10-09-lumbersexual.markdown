@@ -16,7 +16,7 @@ This will be the outlook of how I will be creating my blog with the data and vis
 <div id="chart"></div>
 <script>
 var width = 960,
-    height = 1200,
+    height = 500,
     padding = 1.5, 
     clusterPadding = 6, 
     maxRadius = 12;

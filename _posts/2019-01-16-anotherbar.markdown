@@ -1,16 +1,14 @@
 ---
 layout: post
-title: "Brunch Swag"
-date: 2017-10-08
+title: "Another Bar"
+date: 2019-01-16
 description: 
 image: /assets/images/placeholder-15.jpg
-author: Thomas Vaeth
+author: B
 tags:
   - Squid
 ---
-Church-key XOXO try-hard, schlitz kickstarter meh marfa sustainable yuccie you probably haven't heard of them. Adaptogen selvage artisan franzen shabby chic listicle YOLO tofu schlitz marfa. Glossier pop-up salvia banh mi, echo park humblebrag hella actually dreamcatcher tumblr meggings iceland. 
-
-Fanny pack chambray pinterest adaptogen salvia. Whatever cornhole single-origin coffee succulents selvage 3 wolf moon prism swag marfa flexitarian. Butcher semiotics gentrify fam. Normcore next level heirloom copper mug sriracha. Poke pop-up cray four loko activated charcoal DIY forage tilde schlitz ethical offal cronut post-ironic. Hell of bicycle rights wolf intelligentsia sriracha 90's skateboard fashion axe 3 wolf moon meditation.
+This is a bar chart that is aligned and placed properly and also is using data from data file.I don't know what this data is about but it's cool.
 
 <h3>D3.js Bar Chart Using YAML and Jekyll</h3>
 <p>This is a D3.js bar chart that is driven from dynamically generated JSON, from YAML stored in the _data folder within this Github Pages repository running Jekyll.</p>
@@ -37,10 +35,9 @@ Fanny pack chambray pinterest adaptogen salvia. Whatever cornhole single-origin 
   display: none;
 }
 </style>
-
 <script>
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 750 - margin.left - margin.right,
+    width = window.innerWidth - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);

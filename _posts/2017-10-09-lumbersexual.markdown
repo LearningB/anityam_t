@@ -22,7 +22,7 @@ This will be the outlook of how I will be creating my blog with the data and vis
 }
 </style>
 <script>
-var width = 960,
+var width = window.innerWidth,
     height = 500,
     padding = 1.5, 
     clusterPadding = 6, 

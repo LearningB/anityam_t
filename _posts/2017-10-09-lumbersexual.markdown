@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Lumbersexual"
-date: 2017-10-09
+title: "Cluster Data"
+date: 2019-01-21
 description: 
 image: /assets/images/placeholder-3.jpg
 author: Bijen
@@ -10,7 +10,7 @@ tags:
   - Moon Drinking
   - Kale
 ---
-This will be the outlook of how I will be creating my blog with the data and visualizing it. Looking at the below each color will represent a channel and the bubble will represent a video posted in the channel and the size will be the view count.
+This is the first trial blog for the first project. A simple showcase on how I want to gather and visualize data. As per the below demo chart, it's basically a cluster view of channels and their videos. Each color represents a specific channel and the different sized bubbles for that color represents videos produced by those channel. The shape of the bubble is dictated by the total number of views on that video, the bigger the bubble the larger the audience. 
 
 
 <div id="chart"></div>
@@ -111,6 +111,4 @@ function collide(alpha) {
 }
 </script>
 
-Sartorial cardigan semiotics artisan ramps, cred bushwick gentrify kinfolk stumptown celiac tousled locavore YOLO craft beer. Whatever activated charcoal chillwave heirloom, you probably haven't heard of them XOXO craft beer irony try-hard hell of. Humblebrag stumptown heirloom roof party DIY food truck wolf sriracha hexagon tattooed subway tile cardigan. Brooklyn plaid gastropub subway tile brunch keytar. Copper mug taiyaki slow-carb wolf etsy, cardigan mumblecore edison bulb blog photo booth cred meditation pug. Sustainable unicorn leggings readymade, whatever put a bird on it four loko humblebrag freegan deep v chicharrones locavore retro skateboard. Letterpress crucifix normcore lo-fi disrupt asymmetrical vape hell of brunch chillwave shabby chic subway tile kinfolk jianbing plaid. Chia etsy artisan selvage austin, authentic waistcoat occupy cred ugh distillery sartorial hexagon pickled raclette. Vinyl aesthetic iPhone craft beer four loko seitan la croix mlkshk authentic venmo knausgaard 90's photo booth. Intelligentsia hexagon retro stumptown YOLO, palo santo banjo beard asymmetrical pok pok migas. 90's austin banjo direct trade, quinoa cold-pressed godard normcore. La croix celiac actually, farm-to-table lyft ugh shoreditch tilde.
 
-Craft beer shaman williamsburg sartorial iPhone deep v, paleo pok pok cred brooklyn glossier helvetica leggings. Franzen skateboard vice, jianbing disrupt tacos sustainable squid ennui ethical salvia beard master cleanse. +1 adaptogen tofu pabst, before they sold out crucifix heirloom. Put a bird on it biodiesel migas, godard meh art party tacos everyday carry brunch kickstarter. Salvia tousled hashtag, occupy post-ironic shoreditch prism flexitarian enamel pin sustainable gentrify viral. Four dollar toast umami put a bird on it mlkshk typewriter shoreditch. Affogato XOXO readymade lyft. Cliche austin shoreditch unicorn intelligentsia pabst XOXO YOLO listicle selfies iceland bushwick. Street art godard pinterest cliche. Fixie migas pug shaman ugh craft beer chillwave keffiyeh selvage plaid.

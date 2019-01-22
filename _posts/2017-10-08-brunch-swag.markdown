@@ -12,7 +12,86 @@ Church-key XOXO try-hard, schlitz kickstarter meh marfa sustainable yuccie you p
 
 Fanny pack chambray pinterest adaptogen salvia. Whatever cornhole single-origin coffee succulents selvage 3 wolf moon prism swag marfa flexitarian. Butcher semiotics gentrify fam. Normcore next level heirloom copper mug sriracha. Poke pop-up cray four loko activated charcoal DIY forage tilde schlitz ethical offal cronut post-ironic. Hell of bicycle rights wolf intelligentsia sriracha 90's skateboard fashion axe 3 wolf moon meditation.
 
-![Placeholder](/assets/images/placeholder-20.jpg)
+<h3>D3.js Bar Chart Using YAML and Jekyll</h3>
+<p>This is a D3.js bar chart that is driven from dynamically generated JSON, from YAML stored in the _data folder within this Github Pages repository running Jekyll.</p>
+<div id="chart"></div>
+<p>The YAML can be found in <a href="https://github.com/kinlane/d3-js-using-yaml-jekyll/tree/gh-pages/_data" target="_blank">_data/bar-chart.yaml</a>, but is transformed into the JSON needed for this chart, using <a href="https://github.com/kinlane/d3-js-using-yaml-jekyll/blob/gh-pages/data/bar-chart.json" target="_blank">/data/bar-chart.json</a>, demonstrating how YAML can be used to drive visualizations on Github.</p>
+<style>
+/* Bar Chart */
+.bar {
+  fill: steelblue;
+}
+.bar:hover {
+  fill: brown;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+</style>
+
+<script>
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 750 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+var y = d3.scale.linear()
+    .range([height, 0]);
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+d3.json("/data/bar-chart.json", function(error, data) {
+  if (error) throw error;
+  x.domain(data.map(function(d) { return d.letter; }));
+  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Number of Years");
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.letter); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("height", function(d) { return height - y(d.frequency); });
+});
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+</script>
+
+
+
 
 Jean shorts pour-over chicharrones woke. Kinfolk next level chia master cleanse. Messenger bag green juice tumeric trust fund pour-over vegan. Celiac kogi vinyl taiyaki shaman scenester plaid live-edge whatever tilde subway tile XOXO helvetica you probably haven't heard of them four dollar toast. Knausgaard franzen mumblecore normcore microdosing. Man bun pickled woke, offal twee craft beer vape tilde stumptown retro small batch butcher la croix photo booth. 
 

@@ -6,7 +6,8 @@ description:
 image: /assets/images/placeholder-15.jpg
 author: B
 tags:
-  - Squid
+  - Bar
+  - Chart
 ---
 This is a bar chart that is aligned and placed properly and also is using data from data file.I don't know what this data is about but it's cool.
 
@@ -35,6 +36,7 @@ This is a bar chart that is aligned and placed properly and also is using data f
   display: none;
 }
 </style>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = window.innerWidth - margin.left - margin.right,

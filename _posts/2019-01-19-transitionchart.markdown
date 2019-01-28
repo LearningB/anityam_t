@@ -6,9 +6,9 @@ description:
 image: /assets/images/placeholder-8.jpg
 author: B
 tags: 
-  - Squid
-  - Moon Drinking
-  - Kale
+  - Bar
+  - Stacked
+  - Chart
 ---
 This is an example of transition between charts which are stacked as well as grouped. Testing transition from one chart to another. The data represents sudden change in your feeling. Higher the bar more good energy seems to be radiated from you.
 <div id="chart"></div>
@@ -43,6 +43,7 @@ svg {
   <label><input type="radio" name="mode" value="grouped"> Grouped</label>
   <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
 </form>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var n = 4, 
     m = 58, 

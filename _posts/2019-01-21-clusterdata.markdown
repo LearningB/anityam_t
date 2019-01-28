@@ -6,9 +6,8 @@ description:
 image: /assets/images/placeholder-3.jpg
 author: Bijen
 tags:
-  - Mixtape
-  - Moon Drinking
-  - Kale
+  - Cluster
+  - Bubble
 ---
 This is the first trial blog for the first project. A simple showcase on how I want to gather and visualize data. As per the below demo chart, it's basically a cluster view of channels and their videos. Each color represents a specific channel and the different sized bubbles for that color represents videos produced by those channel. The shape of the bubble is dictated by the total number of views on that video, the bigger the bubble the larger the audience. 
 
@@ -21,6 +20,7 @@ This is the first trial blog for the first project. A simple showcase on how I w
   border: 1px solid gray;
 }
 </style>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var width = window.innerWidth,
     height = 500,

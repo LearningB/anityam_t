@@ -6,9 +6,8 @@ description:
 image: /assets/images/placeholder-16.jpg
 author: B
 tags: 
-  - Mixtape
-  - Moon Drinking
-  - Kale
+  - Collison
+  - Bubble
 ---
 This is the second post and is centered around collision detection nothing to do with data visulization. Playing with display
 <div id="chart"></div>
@@ -19,6 +18,7 @@ This is the second post and is centered around collision detection nothing to do
   border: 1px solid gray;
 }
 </style>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var width = window.innerWidth,
     height = 900;

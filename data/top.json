@@ -1,0 +1,11 @@
+---
+layout: none
+---
+[{% for chart in site.data.channel %}
+  {
+    "name": "{{ chart.name }}",
+    "subscriber": "{{ chart.subscriber}}",
+    "category": "{{ chart.category}}",
+    "subCategory": "{{ chart.subCategory}}"
+  }{% if forloop.last == false %},{% endif %}
+{% endfor %}]

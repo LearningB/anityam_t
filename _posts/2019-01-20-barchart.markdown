@@ -6,9 +6,8 @@ description:
 image: /assets/images/placeholder-9.jpg
 author: B
 tags: 
-  - Dummy Text
-  - Moon Drinking
-  - Kale
+  - Bar
+  - Chart
 ---
 This is another demo on the bar chart. The data represent how many times the page has not been clicked in any minute. Enjoying clicking on the page while no change takes effect.
 <div id="chart"></div>
@@ -26,6 +25,7 @@ This is another demo on the bar chart. The data represent how many times the pag
   display: none;
 }
 </style>
+<script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 var n = 20, 
     m = 4; 

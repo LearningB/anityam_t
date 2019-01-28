@@ -119,7 +119,7 @@ var forceX = d3.forceX(function(d){
 	}else{
 		return 500
 	}
-	}).strength(0.5);
+	}).strength(1);
 var together = d3.forceX(function(){
 	return width/2
 	}).strength(0.05);

@@ -61,7 +61,7 @@ div.tooltip {
   font-size :0px;
 }
 svg{
-  height: 500px;
+  height: 700px;
   width: 700px
 }
 </style>
@@ -87,7 +87,7 @@ var legendColor = d3.scaleOrdinal()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
 		.range(["#ff0000", '#ffad33', '#09d9ff']);
 var svg = d3.select("#chart").append("svg")
-	.attr("viewBox", "0 0 700 500")
+	.attr("viewBox", "0 0 700 700")
 	.append("g")
   .attr("transform","translate(0,0)");
 var chartDiv = document.getElementById("chart");		

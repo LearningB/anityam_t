@@ -70,6 +70,16 @@ div.tooltip {
   border-radius: 8px;
   pointer-events: none;
 }
+.label{
+  font-size : 10px;
+}
+.swatch{
+  height: 10px;
+  width: 10px;
+}
+.legendTitle{
+  font-size :10px;
+}
 </style>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://unpkg.com/d3-force-attract@latest"></script>
@@ -88,13 +98,12 @@ var v = d3.transition()
         .ease(d3.easeLinear);
 var x = d3.scalePoint()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
-        .range([0,window.innerWidth]);        
+        .range([0,800]);        
 var legendColor = d3.scaleOrdinal()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
 		.range(["#ff0000", '#ffad33', '#09d9ff']);
 var svg = d3.select("#chart").append("svg")
-	.attr("height",height)
-	.attr("width",width)
+	.attr("viewBox", "0 0 800 900")
 	.append("g")
   .attr("transform","translate(0,0)");		
 var radiusScale = d3.scaleSqrt().domain([10, 5000000]).range([1,50]);
@@ -104,7 +113,7 @@ var ordinalScale = d3.scaleOrdinal()
 		}).range(['#ff0000', '#ffad33', '#09d9ff']);	    
 var forceX = d3.forceX(function(d){
 	if (d.category === "vlogger"){
-		return 100
+		return 100 
 	}else if (d.category === "musicChannel"){
 		return 300
 	}else{
@@ -118,7 +127,7 @@ var collides = d3.forceCollide(function(d){
 	return radiusScale(d.subscriber)+3;
 	});
 var simulation = d3.forceSimulation()
-    .force('center', d3.forceCenter(width/2, height/3))
+    .force('center', d3.forceCenter(width/4, height/3))
 	.force("x", together)
 	.force("y", d3.forceY(height/2).strength(0.05))
     .force("collide",collides);
@@ -140,7 +149,7 @@ function ready(error,data){
     redraw(dataIndex);
     var legend = svg.append("g")
         .attr("class", "legendOrdinal")
-        .attr("transform", "translate(10,50)");
+        .attr("transform", "translate(10,10)");
     var legendOrdinal = d3.legendColor()
                 .scale(legendColor)
                 .orient("vertical")
@@ -188,7 +197,7 @@ function ready(error,data){
              svg.selectAll(".textIndex").remove();
             simulation
 				.force("x", forceX)
-                .alphaTarget(0.05)
+        .alphaTarget(0.05)
 				.restart()
 				})
         .transition(v);          
@@ -221,7 +230,7 @@ function redraw(data){
         .attr("class", "textIndex")
         .text("The size of the bubble represents the number of subscriber")
         .style("font-size","10px")
-        .attr("transform", "translate(10,250)");
+        .attr("transform", "translate(280,20)");
     svg.selectAll(".index")
         .data(data)
         .enter().append("circle")
@@ -232,7 +241,7 @@ function redraw(data){
         .attr("r", function(d){
             return d
         })
-        .attr("transform", "translate(50,300) rotate(-90 80 80)")
+        .attr("transform", "translate(240,50) rotate(-90 80 80)")
         .style("stroke-dasharray", ("2,1")) 
         .style("stroke", "black")
         .style("fill", "none")

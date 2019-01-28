@@ -98,7 +98,7 @@ var v = d3.transition()
         .ease(d3.easeLinear);
 var x = d3.scalePoint()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
-        .range([0,800]);        
+        .range([0,width]);        
 var legendColor = d3.scaleOrdinal()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
 		.range(["#ff0000", '#ffad33', '#09d9ff']);
@@ -127,7 +127,7 @@ var collides = d3.forceCollide(function(d){
 	return radiusScale(d.subscriber)+3;
 	});
 var simulation = d3.forceSimulation()
-    .force('center', d3.forceCenter(width/4, height/3))
+    .force('center', d3.forceCenter(width/2, height/3))
 	.force("x", together)
 	.force("y", d3.forceY(height/2).strength(0.05))
     .force("collide",collides);

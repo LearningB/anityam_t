@@ -82,14 +82,19 @@ var v = d3.transition()
         .ease(d3.easeLinear);
 var x = d3.scalePoint()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
-        .range([0,width]);        
+        .range([0,width]);
+var subX = d3.scalePoint()
+            .domain(function(d){
+              return d.subCategory
+            }).range(d3.schemeCategory10);
+console.log(x);
 var legendColor = d3.scaleOrdinal()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
 		.range(["#ff0000", '#ffad33', '#09d9ff']);
 var svg = d3.select("#chart").append("svg")
 	.attr("viewBox", "0 0 700 700")
 	.append("g")
-  .attr("transform","translate(0,0)");
+  .attr("transform","translate(10,0)");
 var chartDiv = document.getElementById("chart");		
 var radiusScale = d3.scaleSqrt().domain([10, 5000000]).range([1,50]);
 var ordinalScale = d3.scaleOrdinal()
@@ -135,7 +140,7 @@ function ready(error,data){
     redraw(dataIndex);
     var legend = svg.append("g")
         .attr("class", "legendOrdinal")
-        .attr("transform", "translate(-10,0)");
+        .attr("transform", "translate(30,0)");
     var legendOrdinal = d3.legendColor()
                 .scale(legendColor)
                 .orient("vertical")

@@ -24,14 +24,6 @@ var test = d3.selectAll("#chart")
 			.style("background","#FF5733");
 var cluster = test.append("g");
 var link = cluster.append("a");
-var text =cluster.append("text")	
-	.attr("dy", ".35em")
-	.attr("x", width/3)
-	.attr("y", "40")
-	.attr("class","visible")
-	.style("visibility", "hidden")
-	.style("fill", "black")
-	.text("this is hidden");
 d3.queue()
 	.defer(d3.json, "/data/music.json")
 	.await(create);
@@ -90,19 +82,18 @@ function remove(){
 	d3.selectAll(".info").remove();
 };
 function handleMouseOver(subscriber,musician,i,channelID) {
+	d3.selectAll(".visible").remove();
 	link
 		.attr("xlink:href", "https://www.youtube.com/channel/"+ channelID)
-		.append("circle")
+		.append("text")
 		.attr("class", "visible")
-		.attr("cx", width/3)
-		.attr("cy", "40")
-		.attr("r", "10")
-		.style("fill","white");
-	text.style("visibility", "visible")
+		.attr("x", width/2)
+		.attr("y", "40")
+		.style("fill","white")
 			.text(function(){
-				return [musician + " and has " + subscriber]; 
+				return [musician + " has " + subscriber + " subscriber"]; 
 			});
-		}
+		};
 function handleMouseOut(subscriber) {
 	d3.select("#t" + subscriber).remove();
   };

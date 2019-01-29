@@ -16,12 +16,21 @@ tags:
 width = 700;
 height = 700;
 var test = d3.selectAll("#chart")
-            .append("svg")
-            .attr("viewBox", "0 0 700 700")
+			.append("svg")
 			.attr("height", height)
 			.attr("width", width)
 			.attr("fill", "#FF5733")
 			.style("background","#FF5733");
+var cluster = test.append("g");
+var link = cluster.append("a");
+var text =cluster.append("text")	
+	.attr("dy", ".35em")
+	.attr("x", width/3)
+	.attr("y", "40")
+	.attr("class","visible")
+	.style("visibility", "hidden")
+	.style("fill", "black")
+	.text("this is hidden");
 d3.queue()
 	.defer(d3.json, "/data/music.json")
 	.await(create);
@@ -39,12 +48,12 @@ function create(error,data){
 			return scale(d.subscriber)*3;
 	})
 	.attr("height","10")
-	.on('mouseover',function(d,i){handleMouseOver(d.subscriber,d.musician,i)})
+	.on('mouseover',function(d,i){handleMouseOver(d.subscriber,d.musician,i,d.channelID)})
 	.on("mouseout", function(d,i){handleMouseOut(d.subscriber)});
 d3.selectAll("rect")
 		.attr("fill","#FF5733")
 		.transition()
-		.delay(function(d,i){ return 6000*i; }) 
+		.delay(function(d,i){ return 3000*i; }) 
 		.duration(3000)
 		.attr("transform",function(d, i){
 			return "translate("+ ((i*30)/2+30) +","+ (width/2 -(scale(d.subscriber)*3)/2)+") rotate(90 0 0)";
@@ -69,7 +78,7 @@ function draw(name, index){
 		.attr("fill", "black")
 		.text(name)
 		.transition()
-		.delay(function(d,i){ return 6000*i; }) 
+		.delay(function(d,i){ return 3000*i; }) 
 		.duration(3000)
 		.attr("transform",function(){
 			return "translate("+ ((index*30)/2+60) +","+ (width/2 -20)+") rotate(90 0 0)";
@@ -79,22 +88,20 @@ function remove(){
 	d3.selectAll(".text").remove();
 	d3.selectAll(".info").remove();
 };
-function handleMouseOver(subscriber,musician,i) {  
-	test.append("text")
-	.attr("id", function(){
-		return  "t" + subscriber;
-	})
-	.attr("x", function(){
-		return  ((i*30)/2+30) - 20;
-	})
-	.attr("y", function(){
-		return  (width/2 -(scale(subscriber)*3)/2) - 15;
-	})
-	.text(function() {
-	  return [musician + " : " + subscriber]; 
-	})
-	.attr("fill", "#cc0e08");
-  }
+function handleMouseOver(subscriber,musician,i,channelID) {
+	link
+		.attr("xlink:href", "https://www.youtube.com/channel/"+ channelID)
+		.append("circle")
+		.attr("class", "visible")
+		.attr("cx", width/3)
+		.attr("cy", "40")
+		.attr("r", "10")
+		.style("fill","white");
+	text.style("visibility", "visible")
+			.text(function(){
+				return [musician + " and has " + subscriber]; 
+			});
+		}
 function handleMouseOut(subscriber) {
 	d3.select("#t" + subscriber).remove();
   };

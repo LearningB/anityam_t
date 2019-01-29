@@ -5,6 +5,7 @@ layout: none
   {
     "musician": "{{ chart.musician}}",
     "subscriber": "{{ chart.subscriber}}",
-    "viewCount": "{{ chart.viewCount}}"
+    "viewCount": "{{ chart.viewCount}}",
+    "channelID":"{{ chart.channelID}}"
   }{% if forloop.last == false %},{% endif %}
 {% endfor %}]

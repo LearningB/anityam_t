@@ -16,7 +16,8 @@ tags:
 width = 700;
 height = 700;
 var test = d3.selectAll("#chart")
-			.append("svg")
+            .append("svg")
+            .attr("viewBox", "0 0 700 700")
 			.attr("height", height)
 			.attr("width", width)
 			.attr("fill", "#FF5733")

@@ -9,7 +9,12 @@ tags:
   - SAy
   - Bar
 ---
-<p></p>
+<p>Sound is an important feature of our human experience. Sound happens to be the largest medium of expression for humans, making music a universal language. Our culture and environment are filled with different patterns and rhythms of sounds. Our memories have engraved tones in them. We easily relate feelings with tones. We like to be heard or to hear.
+ </p>
+
+ <p>Today we will be looking into the musical scene in Nepal through the lens of Youtube. Youtube's platform is the biggest vibrant ecosystem for music creators and listeners. We have collected data on some of the most famous musical icons on youtube sphere and created a comparison chart on them. </p>
+
+ <p>This is a one dimensional bar chart with a little twist to make it more musical. Each bar represents a channel and the length indicates the size of the subscriber. The proportionality of the graph is not an accurate representation of the data difference  as due to the difference in lowest to highest value in dataset. The graph does try to imitate the space of time in music so do expect some latency for the full graphical picture. But by the time you are done with this article the graph should already be drawn in the canvas below. Hover over the bars and you will get a textual information on the upper right hand side of the canvas which is a symlink for particular creators youtube space. </p>
 <div id="chart"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>

@@ -8,3 +8,56 @@ author: Bijendra
 tags: 
   - SAy
 ---
+<style>
+chart {
+  font: 12px sans-serif;
+}
+path {
+  stroke-width: 1px;
+  stroke: white;
+  fill: steelblue;
+  cursor: pointer;
+}
+path:hover, path.highlighted {
+  fill: #ff588e;
+}
+</style>
+<div id="chart"></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+var width = 900,
+    height = 800;
+var projection = d3.geo.mercator()
+    .scale(4004.813817984365)
+    .center([84.13207626342776,28.417103106776114]) 
+    .translate([width/2,height/2]);
+var path = d3.geo.path()
+    .projection(projection);
+var svg = d3.selectAll("#chart").append("svg")
+    .attr("viewBox", "0 0 900 800")
+    .attr("width", width)
+    .attr("height", height);
+var features = svg.append("g")
+    .attr("class","features");
+var zoom = d3.behavior.zoom()
+    .scaleExtent([1, Infinity])
+    .on("zoom",zoomed);
+svg.call(zoom);
+d3.json("/data/nepal-district.topojson",function(error,geodata) {
+  if (error) return console.log(error);
+  features.selectAll("path")
+    .data(topojson.feature(geodata,geodata.objects.collection).features)
+    .enter()
+    .append("path")
+    .attr("d",path)
+    .on("click",clicked);
+});
+function clicked(d,i) {
+ console.log(d);
+};
+function zoomed() {
+  features.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")")
+      .selectAll("path").style("stroke-width", 1 / zoom.scale() + "px" );
+};
+  </script>

@@ -11,14 +11,18 @@ tags:
 <p></p>
 <div id="chart"></div>
 <style>
-.viz-biPartite-mainBar{
-  shape-rendering: auto;
+.viz-biPartite-mainBar rect{
   fill-opacity: 0;
   stroke-width: 0.5px;
   stroke: rgb(0, 0, 0);
   stroke-opacity: 0;
 }
-.subBars{
+.viz-biPartite-mainBar .perc{
+  fill:white;
+  text-anchor:middle;
+  font-size:12px;
+}
+.viz-biPartite-subBar{
 	shape-rendering:crispEdges;
 }
 .edges{
@@ -26,12 +30,6 @@ tags:
 	fill-opacity:0.3;
 }
 .label{
-  stroke-opacity: .4;
-  stroke:black;
-  fill-opacity: 1;
-  fill: black;
-}
-.perc{
   stroke-opacity: .4;
   stroke:black;
   fill-opacity: 1;
@@ -68,6 +66,15 @@ var legendColor = d3.scaleOrdinal()
 		.domain(["Sajilo Kitchen", "Kukmandu", "Learn To Cook With Me","Yummy Food World","Yummy Nepali Kitchen","Chef Suni" ])
         .range(["#3366CC", '#DC3912', "#FF9900","#109618","#990099","#0099C6"]);
 function start(error,data){
+    var legend = svg.append("g")
+        .attr("class", "legendOrdinal")
+        .attr("transform", "translate(700,0)");
+    var legendOrdinal = d3.legendColor()
+                .scale(legendColor)
+                .orient("vertical")
+                 .title("");
+    svg.select(".legendOrdinal")
+        .call(legendOrdinal);
     data.forEach(function(d){
         views.push(parseInt(d.viewCount));
 		var cell = [];

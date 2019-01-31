@@ -11,7 +11,7 @@ tags:
 <p>Food </p>
 <div id="chart"></div>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="http://vizjs.org/viz.v1.3.0.min.js"></script>
+<script src="/assets/js/viz.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
 <script>
 width = 700;

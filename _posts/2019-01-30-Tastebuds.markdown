@@ -8,8 +8,36 @@ author: Bijendra
 tags: 
   - SAy
 ---
-<p>Food </p>
+<p></p>
 <div id="chart"></div>
+<style>
+.viz-biPartite-mainBar{
+  shape-rendering: auto;
+  fill-opacity: 0;
+  stroke-width: 0.5px;
+  stroke: rgb(0, 0, 0);
+  stroke-opacity: 0;
+}
+.subBars{
+	shape-rendering:crispEdges;
+}
+.edges{
+	stroke:none;
+	fill-opacity:0.3;
+}
+.label{
+  stroke-opacity: .4;
+  stroke:black;
+  fill-opacity: 1;
+  fill: black;
+}
+.perc{
+  stroke-opacity: .4;
+  stroke:black;
+  fill-opacity: 1;
+  fill: black;
+}
+    </style>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="/assets/js/viz.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
@@ -26,10 +54,16 @@ var color = {sajilokitchen:"#3366CC", kukmandu:"#DC3912", learntocookwithme:"#FF
 var svg = d3.select("#chart").append("svg")
         .attr("viewBox", "0 0 900 800")
         .attr("width", 960).attr("height", 800);
-svg.append("text").attr("x",200).attr("y",170)
-	.attr("class","header").text("Veg or Non Veg");
-svg.append("text").attr("x",650).attr("y",70)
-	.attr("class","header").text("Meat");
+svg.append("text")
+    .attr("x",200).attr("y",30)
+    .attr("class","header")
+    .text("Veg or Non Veg");
+svg.append("text").attr("x",700).attr("y",170)
+    .attr("class","header")
+    .text("Meat");
+svg.append("text").attr("x",250).attr("y",380)
+    .attr("class","header")
+    .text("Dish");
 var legendColor = d3.scaleOrdinal()
 		.domain(["Sajilo Kitchen", "Kukmandu", "Learn To Cook With Me","Yummy Food World","Yummy Nepali Kitchen","Chef Suni" ])
         .range(["#3366CC", '#DC3912', "#FF9900","#109618","#990099","#0099C6"]);
@@ -51,7 +85,6 @@ function start(error,data){
 			meatData.push(newCell);
 		};
         });
-    console.log(data);
 	var scale = d3.scaleLog()
 			.domain([d3.min(views), d3.max(views)])
 			.range([1,20]);
@@ -62,7 +95,7 @@ function start(error,data){
 		mainData[i][2] =scale(mainData[i][2])
 	};
 	var g =[svg.append("g").attr("transform","translate(150,40)")
-		,svg.append("g").attr("transform","translate(650,100)"),
+		,svg.append("g").attr("transform","translate(650,200)"),
 		svg.append("g").attr("transform","translate(150,400)")];
 	var bp=[viz.biPartite()
 		.data(mainData)
@@ -105,7 +138,15 @@ function start(error,data){
 	g[i].call(bp[i]);
 	g[i].selectAll(".viz-biPartite-mainBar")
 	.on("mouseover",mouseover)
-	.on("mouseout",mouseout);
+    .on("mouseout",mouseout);
+    g[i].append("text").attr("x",-50).attr("y",-8).style("text-anchor","middle").text("Channel");
+    if (i === 1){
+        g[i].append("text").attr("x", 200).attr("y",-8).style("text-anchor","middle").text("Meat Type");
+    }else if (i === 2){
+        g[i].append("text").attr("x", 250).attr("y",-8).style("text-anchor","middle").text("Dish");
+    }else{
+       g[i].append("text").attr("x", 250).attr("y",-8).style("text-anchor","middle").text("Diet"); 
+    };
 	g[i].selectAll(".viz-biPartite-mainBar").append("text").attr("class","label")
 		.attr("x",d=>(d.part=="primary"? -30: 30))
 		.attr("y",d=>+6)
@@ -115,18 +156,20 @@ g[i].selectAll(".viz-biPartite-mainBar").append("text").attr("class","perc")
 	.attr("x",d=>(d.part=="primary"? 10: -10))
 	.text(function(d){ return d3.format("0.0%")(d.percent)})
 	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
-	function mouseover(d){
+});
+function mouseover(d){
+	[0,1,2].forEach(function(i){
 		bp[i].mouseover(d);
-		g[i].selectAll(".viz-biPartite-mainBar")
-		.select(".perc")
-		.text(function(d){ return d3.format("0.0%")(d.percent)})
-	};
-	function mouseout(d){
+		g[i].selectAll(".viz-biPartite-mainBar").select(".perc")
+		.text(function(d){ return d3.format("0.0%")(d.percent)});
+	});
+}
+function mouseout(d){
+	[0,1,2].forEach(function(i){
 		bp[i].mouseout(d);
-		g[i].selectAll(".viz-biPartite-mainBar")
-			.select(".perc")
-		.text(function(d){ return d3.format("0.0%")(d.percent)})
-	};
-})
+		g[i].selectAll(".viz-biPartite-mainBar").select(".perc")
+		.text(function(d){ return d3.format("0.0%")(d.percent)});
+	});
+};
 };
 </script>

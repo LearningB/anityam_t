@@ -1,0 +1,14 @@
+---
+layout: none
+---
+[{% for chart in site.data.food %}
+  {
+    "name": "{{ chart.name}}",
+    "dish": "{{ chart.dish}}",
+    "item": "{{ chart.item}}",
+    "type": "{{ chart.type}}",
+    "recipe": "{{ chart.recipe}}",
+    "viewCount": "{{ chart.views}}",
+    "totalCounts":"{{ chart.totalViews}}"
+  }{% if forloop.last == false %},{% endif %}
+{% endfor %}]

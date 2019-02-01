@@ -37,7 +37,7 @@ var width = 900,
     height = 800;
     var w = 300, h = 50;
 var projection = d3.geo.mercator()
-    .scale(2000)
+    .scale(4004.813817984365)
     .center([84.13207626342776,28.417103106776114]) 
     .translate([width/2,height/2]);
 var path = d3.geo.path()
@@ -46,6 +46,7 @@ var color = d3.scale.threshold()
     .domain([1, 3, 6, 8, 10])
     .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 var svg = d3.selectAll("#chart").append("svg")
+    .attr("viewBox", "0 0 900 800")
     .attr("width", width)
     .attr("height", height);
 var features = svg.append("g")
@@ -56,6 +57,7 @@ var zoom = d3.behavior.zoom()
 svg.call(zoom);
 var key = d3.select("#legend1")
 .append("svg")
+.attr("viewBox", "0 0 300 50")
 .attr("width", w)
 .attr("height", h);
 var legend = key.append("defs")
@@ -128,15 +130,15 @@ d3.selectAll("#travelled")
                 .attr("transform", "translate(0,10)");
                 key.append("g")
                 .attr("class", "y axis")
-                .attr("transform", "translate(0,30)")
+                .attr("transform", "translate(0,20)")
                 .call(yAxis)
                 .append("text")
                 .attr("transform", "rotate(0 0 0)")
-                .attr("transform", "translate(60,10)")
+                .attr("transform", "translate(250,20)")
                 .attr("y", 0)
-                .attr("dy", ".71em")
+                .attr("dy", ".5em")
                 .style("text-anchor", "end")
-                .text("axis title");
+                .text("Number of providence visit");
                 svg.selectAll("path")
                 .attr("class", function(d){
                     if (providenceID[d.properties.D_ID]!==0){

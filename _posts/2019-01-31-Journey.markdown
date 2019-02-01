@@ -13,6 +13,9 @@ tags:
 chart {
   font: 12px sans-serif;
 }
+.legendV{
+  font: 120% sans-serif;
+}
 path {
   stroke-width: 1px;
   stroke: white;
@@ -32,6 +35,7 @@ path:hover, path.highlighted {
 <div id="legend1"></div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.13.0/d3-legend.js"></script>
 <script>
 var width = 900,
     height = 800;
@@ -55,42 +59,58 @@ var zoom = d3.behavior.zoom()
     .scaleExtent([1, Infinity])
     .on("zoom",zoomed);
 svg.call(zoom);
-var key = d3.select("#legend1")
-.append("svg")
-.attr("viewBox", "0 0 300 50")
-.attr("width", w)
-.attr("height", h);
-var legend = key.append("defs")
-.append("svg:linearGradient")
-.attr("id", "gradient")
-.attr("x1", "0%")
-.attr("y1", "100%")
-.attr("x2", "100%")
-.attr("y2", "100%")
-.attr("spreadMethod", "pad");
-legend.append("stop")
-.attr("offset", "0%")
-.attr("stop-color", "#f2f0f7")
-.attr("stop-opacity", 1);
-legend.append("stop")
-.attr("offset", "33%")
-.attr("stop-color", "#bcbddc")
-.attr("stop-opacity", 1);
-legend.append("stop")
-.attr("offset", "66%")
-.attr("stop-color", "#9e9ac8")
-.attr("stop-opacity", 1);
-legend.append("stop")
-.attr("offset", "100%")
-.attr("stop-color", "#54278f")
-.attr("stop-opacity", 1);
-var y = d3.scale.linear()
-.range([0, 300])
-.domain([1, 12]);
-var yAxis = d3.svg.axis()
-.orient("bottom")
-.scale(y)
-.ticks(3);
+var legendColor = d3.scale.ordinal()
+    .domain(["Vlogger", "Music Channel", "Web Channel"])
+		.range(["#ff0000", '#ffad33', '#09d9ff',"yellow"]);
+function gradientDraw(){
+  var legend = svg.append("defs")
+      .append("svg:linearGradient")
+      .attr("id", "gradient")
+      .attr("x1", "0%")
+      .attr("y1", "100%")
+      .attr("x2", "100%")
+      .attr("y2", "100%")
+      .attr("spreadMethod", "pad");
+    legend.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#f2f0f7")
+      .attr("stop-opacity", 1);
+    legend.append("stop")
+      .attr("offset", "33%")
+      .attr("stop-color", "#bcbddc")
+      .attr("stop-opacity", 1);
+    legend.append("stop")
+      .attr("offset", "66%")
+      .attr("stop-color", "#9e9ac8")
+      .attr("stop-opacity", 1);
+  legend.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#54278f")
+    .attr("stop-opacity", 1);
+  var y = d3.scale.linear()
+      .range([0, 300])
+      .domain([1, 10]);
+  var yAxis = d3.svg.axis()
+      .orient("bottom")
+      .scale(y)
+      .ticks(5);
+      svg.append("rect")
+          .attr("width", w)
+          .attr("height", h - 40)
+          .style("fill", "url(#gradient)")
+          .attr("transform", "translate(0,10)");
+      svg.append("g")
+          .attr("class", "yaxis")
+          .attr("transform", "translate(0,20)")
+          .call(yAxis)
+          .append("text")
+          .attr("transform", "rotate(0 0 0)")
+          .attr("transform", "translate(200,30)")
+          .attr("y", 0)
+          .attr("dy", ".5em")
+          .style("text-anchor", "end")
+          .text("Providence visit");
+};
 d3.selectAll("#checker")
             .classed("my-selector", true);
 d3.selectAll("#district")
@@ -123,22 +143,6 @@ d3.selectAll("#travelled")
                     };
                 });
             }else{
-                key.append("rect")
-                .attr("width", w)
-                .attr("height", h - 40)
-                .style("fill", "url(#gradient)")
-                .attr("transform", "translate(0,10)");
-                key.append("g")
-                .attr("class", "y axis")
-                .attr("transform", "translate(0,20)")
-                .call(yAxis)
-                .append("text")
-                .attr("transform", "rotate(0 0 0)")
-                .attr("transform", "translate(250,20)")
-                .attr("y", 0)
-                .attr("dy", ".5em")
-                .style("text-anchor", "end")
-                .text("Number of providence visit");
                 svg.selectAll("path")
                 .attr("class", function(d){
                     if (providenceID[d.properties.D_ID]!==0){
@@ -150,13 +154,16 @@ d3.selectAll("#travelled")
                         return color(providenceID[""+d.properties.D_ID]);
                     };
                 });
+                gradientDraw();
             };
   });
 d3.selectAll("#clean")
             .on('click',function(){
                 svg.selectAll(".visited")
                 .style("fill", "steelblue");
-            d3.selectAll("#legend1").remove();
+            d3.selectAll("defs").remove();
+            d3.selectAll(".yaxis").remove();
+            d3.selectAll("rect").remove();
             });
 function draw(mapData){
     d3.json(mapData,function(error,geodata) {
@@ -166,17 +173,41 @@ function draw(mapData){
           .enter()
           .append("path")
           .attr("d",path)
-          .on("click",clicked);
+          .on("mouseover",mouseover)
+          .on("mouseout",mouseout);
       });
 }
 d3.csv("/data/journey.csv", taste);
-function clicked(d,i) {
-}
+function mouseover(d,i) {
+  var titleLegend;
+  var domains = [];
+  if ('district' in d.properties){
+    titleLegend = d.properties.district;
+    if (dict[titleLegend.toLowerCase()] !== ""){
+      domains = dict[titleLegend.toLowerCase()].split(",");
+      legendColor.domain(domains);
+    svg.append("g")
+        .attr("class", "legendV")
+        .attr("transform", "translate(10,50)");
+    var legendV = d3.legend.color()
+                    .shapeWidth(20)
+                    .cells(10)
+                    .title(titleLegend)
+                    .scale(legendColor);
+    svg.select(".legendV")
+        .call(legendV);
+        };
+  }; 
+};
+function mouseout(d,i) {
+  d3.selectAll(".legendV").remove();
+};
 function zoomed() {
   features.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")")
       .selectAll("path").style("stroke-width", 1 / zoom.scale() + "px" );
 };
 var dict = {};
+var prov = {};
 let providenceID = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0};
 var districtId = [];
 function taste(error,data){

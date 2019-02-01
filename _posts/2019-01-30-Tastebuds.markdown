@@ -8,7 +8,12 @@ author: Bijendra
 tags: 
   - SAy
 ---
-<p></p>
+<p>Food is the source of life. We are what we eat. Our food tells us a lot about who we are and where we come from and I feel my essence when looking on my plate. It tells me that I come from a place with majestic white mountains which are always accompanied by some rivers which have turned yellowish by  the flood while moving down the mountains. It tells me that the mountains are worthless without the colorful vegetation around it. It tells me that I love differences and mixing them. My food tells me that I love the warmth of people rather than the cold shrugs.My food defines me and I love sharing it </p>
+
+<p>Being a Nepali, I think we have a strong food culture. We love to eat but more than that we love to eat with others. Our hospitality is best seen in our kitchens and dining tables. We are arrogantly biased on MoMo's and Bhaat. I know that those are the integral part of Nepalese identity. So today I am exploring through the food genre of Nepalese youtube scene.
+</p>
+
+<p>I took a different approach than my previous graphs. Rather than looking at the followers and ranks, I am keen to see the variety of food. The graphs are more centered on diets, meat and the dish. I do respect the six youtubers that I took the data from but for me food wins today. There are 3 biPartite graph, each showing diet, types of meat used and dish respectively moving from left to right. Each color reflects a channel as indicated by the legend on right. Data is based on the top 5 most visited video of each channel.</p>
 <div id="chart"></div>
 <style>
 .viz-biPartite-mainBar rect{
@@ -22,7 +27,7 @@ tags:
   text-anchor:middle;
   font-size:12px;
 }
-.viz-biPartite-subBar{
+.viz-biPartite-subBar{ 
 	shape-rendering:crispEdges;
 }
 .edges{

@@ -1,14 +1,18 @@
 ---
 layout: post
 title: "Journey"
-date: 2019-01-30
+date: 2019-01-31
 description: 
 image: /assets/images/journey.jpg
 author: Bijendra
 tags: 
   - SAy
 ---
-
+<p> A journey is a desire to be somewhere else.Take a bag and go on a journey, feel the differences, enjoy the change and comeback to share the memories. A journey is all it takes to understand who you are by looking into what others are.
+</p>
+<p> In this visualization, I am trying to trace the districts and providence crossed by 3 travel vloggers of Nepal. Looking through their vlogs I felt that travelling is more about showing places rather than making followers so the graphs only talks about places travelled. 
+</p>
+<p><strong>Yup Close this article Pack a bag and go on a Journey and Enjoy life.</strong></p>
 <style>
 chart {
   font: 12px sans-serif;

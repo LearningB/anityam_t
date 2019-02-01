@@ -15,26 +15,20 @@ twitter_username:
 default_img: /assets/images/seo.jpg
 social:
   - name: twitter
-    url: 
-  - name: instagram
-    url: 
-  - name: linkedin
-    url: 
-  - name: github
-    url: 
-  - name: codepen
-    url: 
+    url: https://twitter.com/LearningB2
+  - name: facebook
+    url: https://www.facebook.com/Anityam-1009106875957243/
 
 # Contact settings
 contact_img: /assets/images/antenna.jpg
-formcarry: https://formcarry.com/s/HkIo0nMb7
+formcarry: https://formcarry.com/s/7jeZhZMG5WF
 
 # Disqus settings
 disqus: test-apkdzgmqhj
 
 # MailChimp settings
-mailchimp_action: https://samesies.us17.list-manage.com/subscribe/post-json?u=66ddf555dab480e6a8606430b&amp;id=89b3ee034f
-mailchimp_input: b_66ddf555dab480e6a8606430b_89b3ee034f
+mailchimp_action: https://anityam.us20.list-manage.com/subscribe/post-json?u=7b031223b4c101e50c27ff290&amp;id=66031fa4e8
+mailchimp_input: b_7b031223b4c101e50c27ff290_66031fa4e8
 
 # Author settings
 author:

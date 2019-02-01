@@ -31,7 +31,7 @@ path:hover, path.highlighted {
 }
 </style>
 <button id="district">District Map</button>
-<button id="providence">Providence Map</button>
+<button id="providence">Province Map</button>
 <button id="travelled">Travelled</button>
 <button id="clean">Clean Map</button>
 <div id="chart"></div>

@@ -8,6 +8,7 @@ author: Bijendra
 tags: 
   - SAy
 ---
+
 <style>
 chart {
   font: 12px sans-serif;
@@ -22,20 +23,29 @@ path:hover, path.highlighted {
   fill: #ff588e;
 }
 </style>
+<button id="district">District Map</button>
+<button id="providence">Providence Map</button>
+<button id="travelled">Travelled</button>
+<button id="clean">Clean Map</button>
 <div id="chart"></div>
+<div id="checker"></div>
+<div id="legend1"></div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
 <script>
 var width = 900,
     height = 800;
+    var w = 300, h = 50;
 var projection = d3.geo.mercator()
     .scale(4004.813817984365)
     .center([84.13207626342776,28.417103106776114]) 
     .translate([width/2,height/2]);
 var path = d3.geo.path()
     .projection(projection);
+var color = d3.scale.threshold()
+    .domain([1, 3, 6, 8, 10])
+    .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 var svg = d3.selectAll("#chart").append("svg")
-    .attr("viewBox", "0 0 900 800")
     .attr("width", width)
     .attr("height", height);
 var features = svg.append("g")
@@ -44,20 +54,142 @@ var zoom = d3.behavior.zoom()
     .scaleExtent([1, Infinity])
     .on("zoom",zoomed);
 svg.call(zoom);
-d3.json("/data/nepal-district.topojson",function(error,geodata) {
-  if (error) return console.log(error);
-  features.selectAll("path")
-    .data(topojson.feature(geodata,geodata.objects.collection).features)
-    .enter()
-    .append("path")
-    .attr("d",path)
-    .on("click",clicked);
-});
+var key = d3.select("#legend1")
+.append("svg")
+.attr("width", w)
+.attr("height", h);
+var legend = key.append("defs")
+.append("svg:linearGradient")
+.attr("id", "gradient")
+.attr("x1", "0%")
+.attr("y1", "100%")
+.attr("x2", "100%")
+.attr("y2", "100%")
+.attr("spreadMethod", "pad");
+legend.append("stop")
+.attr("offset", "0%")
+.attr("stop-color", "#f2f0f7")
+.attr("stop-opacity", 1);
+legend.append("stop")
+.attr("offset", "33%")
+.attr("stop-color", "#bcbddc")
+.attr("stop-opacity", 1);
+legend.append("stop")
+.attr("offset", "66%")
+.attr("stop-color", "#9e9ac8")
+.attr("stop-opacity", 1);
+legend.append("stop")
+.attr("offset", "100%")
+.attr("stop-color", "#54278f")
+.attr("stop-opacity", 1);
+var y = d3.scale.linear()
+.range([0, 300])
+.domain([1, 12]);
+var yAxis = d3.svg.axis()
+.orient("bottom")
+.scale(y)
+.ticks(3);
+d3.selectAll("#checker")
+            .classed("my-selector", true);
+d3.selectAll("#district")
+	.on('click',function(){
+        d3.selectAll("path").remove();
+        d3.selectAll("#checker")
+            .classed("my-selector", true);
+        draw("/data/nepal-district.topojson");
+        });
+d3.selectAll("#providence")
+        .on('click',function(){
+            d3.selectAll("path").remove();
+            d3.selectAll("#checker")
+            .classed("my-selector", false);
+            draw("/data/nepal-province.topojson")
+            });
+d3.selectAll("#travelled")
+        .on('click',function(){
+            if (d3.selectAll("#checker").classed("my-selector")){
+                svg.selectAll("path")
+                .style("stroke-width", "1")
+                .attr("class", function(d){
+                    if (districtId.includes(d.properties.D_ID)){
+                        return "visited";
+                    };
+                })
+                .style("fill", function(d){
+                    if (districtId.includes(d.properties.D_ID)){
+                        return "red";
+                    };
+                });
+            }else{
+                key.append("rect")
+                .attr("width", w)
+                .attr("height", h - 40)
+                .style("fill", "url(#gradient)")
+                .attr("transform", "translate(0,10)");
+                key.append("g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(0,30)")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(0 0 0)")
+                .attr("transform", "translate(60,10)")
+                .attr("y", 0)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("axis title");
+                svg.selectAll("path")
+                .attr("class", function(d){
+                    if (providenceID[d.properties.D_ID]!==0){
+                        return "visited";
+                    };
+                })
+                .style("fill", function(d){
+                    if (providenceID[d.properties.D_ID]!==0){
+                        return color(providenceID[""+d.properties.D_ID]);
+                    };
+                });
+            };
+  });
+d3.selectAll("#clean")
+            .on('click',function(){
+                svg.selectAll(".visited")
+                .style("fill", "steelblue");
+            d3.selectAll("#legend1").remove();
+            });
+function draw(mapData){
+    d3.json(mapData,function(error,geodata) {
+        if (error) return console.log(error); 
+        features.selectAll("path")
+          .data(topojson.feature(geodata,geodata.objects.collection).features)
+          .enter()
+          .append("path")
+          .attr("d",path)
+          .on("click",clicked);
+      });
+}
+d3.csv("/data/journey.csv", taste);
 function clicked(d,i) {
- console.log(d);
-};
+}
 function zoomed() {
   features.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")")
       .selectAll("path").style("stroke-width", 1 / zoom.scale() + "px" );
+};
+var dict = {};
+let providenceID = {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0};
+var districtId = [];
+function taste(error,data){
+    data.forEach(function(item){
+        dict[item.district.toLowerCase()] = item.vlogger;
+        if (item.vlogger !==""){
+            districtId.push(+item.districtID);
+            for (var keys in providenceID){
+                if (keys === item.ProvidenceID){
+                    providenceID[keys] = providenceID[keys] + 1;
+                    continue;
+                };
+            };
+        };
+    });
+    draw("/data/nepal-district.topojson");
 };
   </script>

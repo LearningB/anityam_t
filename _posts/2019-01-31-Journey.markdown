@@ -119,13 +119,19 @@ d3.selectAll("#checker")
             .classed("my-selector", true);
 d3.selectAll("#district")
 	.on('click',function(){
-        d3.selectAll("path").remove();
-        d3.selectAll("#checker")
+      d3.selectAll("defs").remove();
+      d3.selectAll(".yaxis").remove();
+      d3.selectAll("rect").remove();
+      d3.selectAll("path").remove();
+      d3.selectAll("#checker")
             .classed("my-selector", true);
         draw("/data/nepal-district.topojson");
         });
 d3.selectAll("#providence")
         .on('click',function(){
+          d3.selectAll("defs").remove();
+            d3.selectAll(".yaxis").remove();
+            d3.selectAll("rect").remove();
             d3.selectAll("path").remove();
             d3.selectAll("#checker")
             .classed("my-selector", false);

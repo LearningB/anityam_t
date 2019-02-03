@@ -116,7 +116,7 @@ var collides = d3.forceCollide(function(d){
 	return radiusScale(d.subscriber)+3;
 	});
 var simulation = d3.forceSimulation()
-    .force('center', d3.forceCenter(width/2, height/3))
+    .force('center', d3.forceCenter(width/2, height/2))
 	.force("x", together)
 	.force("y", d3.forceY(height/2).strength(0.03))
     .force("collide",collides);

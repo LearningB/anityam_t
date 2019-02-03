@@ -87,7 +87,6 @@ var subX = d3.scalePoint()
             .domain(function(d){
               return d.subCategory
             }).range(d3.schemeCategory10);
-console.log(x);
 var legendColor = d3.scaleOrdinal()
 		.domain(["Vlogger", "Music Channel", "Web Channel"])
 		.range(["#ff0000", '#ffad33', '#09d9ff']);
